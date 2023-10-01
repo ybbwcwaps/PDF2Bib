@@ -27,7 +27,7 @@ class Pdf2Ref:
                         find = True
         
         ref_list=[i.replace('\n',' ') for i in ref_list]
-        references=' '.join(ref_list).replace('- ','') # 后面是为单词换行
+        references=' '.join(ref_list).replace('- ','-') # This is followed by a word wrap
         self.pdf.close()
         self.references = references
     
@@ -48,9 +48,9 @@ class Pdf2Ref:
         self.GetUnitRef()
         for f in self.ref_list:
             # Use re library regular expression to split reference information
-            keywords = ["\.", r'\([0-9]+\)']
+            keywords = ["\.","\?", "!", r'\([0-9]+\)']
             pattern = r"(" + r"|".join(keywords) + r")"
             sentences = re.split(pattern, f)
 
-            self.title_list.append(sentences[2])
+            self.title_list.append(sentences[2][:-3])
         
