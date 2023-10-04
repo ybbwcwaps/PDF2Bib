@@ -52,5 +52,5 @@ class Pdf2Ref:
             pattern = r"(" + r"|".join(keywords) + r")"
             sentences = re.split(pattern, f)
 
-            self.title_list.append(sentences[2][:-3])
+            self.title_list.append(re.sub(r'[\d\s]*$', '', (re.sub(r'\s+', ' ', sentences[2][:].replace('\n', ' ').lstrip().rstrip())) + "  "))# re.sub(r'\d*$', '', string)
         

@@ -10,15 +10,24 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>提取PDF中的参考文献</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../resources/background.qrc">
+    <normaloff>:/icon.ico</normaloff>:/icon.ico</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="OpenPDFFile">
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>164</y>
+      <y>170</y>
       <width>180</width>
       <height>70</height>
      </rect>
@@ -27,6 +36,9 @@
      <font>
       <pointsize>13</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255, .7)</string>
     </property>
     <property name="text">
      <string>Select PDF</string>
@@ -41,6 +53,9 @@
       <height>150</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255, .7)</string>
+    </property>
     <property name="html">
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -54,17 +69,20 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>250</y>
+      <y>300</y>
       <width>800</width>
       <height>300</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255, .7)</string>
     </property>
    </widget>
    <widget class="QPushButton" name="DownloadBIB">
     <property name="geometry">
      <rect>
       <x>540</x>
-      <y>164</y>
+      <y>170</y>
       <width>180</width>
       <height>70</height>
      </rect>
@@ -74,23 +92,57 @@ p, li { white-space: pre-wrap; }
       <pointsize>13</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255, .7)</string>
+    </property>
     <property name="text">
      <string>Download BIB</string>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>26</height>
-    </rect>
-   </property>
+   <widget class="QListView" name="listView">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>800</width>
+      <height>600</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image:url(:/background.jpg)url(:/background.jpg)</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="Doing">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>267</y>
+      <width>800</width>
+      <height>33</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255, .7)</string>
+    </property>
+   </widget>
+   <zorder>listView</zorder>
+   <zorder>OpenPDFFile</zorder>
+   <zorder>Profile</zorder>
+   <zorder>OutPrint</zorder>
+   <zorder>DownloadBIB</zorder>
+   <zorder>Doing</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources/background.qrc"/>
+ </resources>
  <connections/>
 </ui>
