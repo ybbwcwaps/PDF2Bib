@@ -36,7 +36,11 @@ class Pdf2Ref:
         """Parse the text content into a single reference.
         """
         self.GetRefPages()
-        pattern=re.compile(r'\[?[1-9][0-9]*\]?\.\s')
+        if self.references[0] == '[':
+            pattern = re.compile(r'\[[1-9][0-9]*\]\s')
+        else:
+            pattern = re.compile(r'[1-9][0-9]*\.\s')
+            
         ref_list=re.split(pattern,self.references)
         ref_list=list(filter(None,ref_list))
         self.ref_list = ref_list
@@ -48,9 +52,19 @@ class Pdf2Ref:
         self.GetUnitRef()
         for f in self.ref_list:
             # Use re library regular expression to split reference information
+            match = re.search(r'(https?|ftp)://[^\s/$.?#].[^\s]*', f)  # is url
+            if match:
+                f = f.replace(' ', '')
+                f = f.replace(',', ' ')
+                pattern = r'\.(?=\d)'
+                f = re.sub(pattern, ' ', f)
+                match = re.search(r'(https?|ftp)://[^\s/$.?#].[^\s]*', f) 
+                self.title_list.append(match.group())
+                continue
+
             keywords = ["\.","\?", "!", r'\([0-9]+\)']
             pattern = r"(" + r"|".join(keywords) + r")"
             sentences = re.split(pattern, f)
-
-            self.title_list.append(re.sub(r'[\d\s]*$', '', (re.sub(r'\s+', ' ', sentences[2][:].replace('\n', ' ').lstrip().rstrip())) + "  "))# re.sub(r'\d*$', '', string)
+            # 几种情况：开头结尾空格，中间的换行符，结尾数字
+            self.title_list.append(re.sub(r'[\d\s]*$', '', (re.sub(r'\s+', ' ', sentences[2][:].replace('\n', ' ').lstrip().rstrip())) + "  "))
         

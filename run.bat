@@ -1,0 +1,1 @@
+cmd /k; python ./Code/main.py
