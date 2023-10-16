@@ -3,6 +3,10 @@ import re
 import utils
 from PyQt5.QtWidgets import QMainWindow, QTextEdit, QAction, QFileDialog, QApplication, QPushButton, QWidget, QGridLayout
 from Ui_interface import *
+import os
+
+# 如果你在虚拟环境中运行，请在此时添加你的虚拟环境中PyQt5路径，例如：
+# os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = "../myproject/Lib/site-packages/PyQt5/Qt5/plugins"
 
 # Inheriting interface base classes to implement functionality
 class QtWindows(Ui_MainWindow):
@@ -61,6 +65,8 @@ class QtWindows(Ui_MainWindow):
         url = f"https://dblp.org/search/publ/api?"
         self.DoingPrint("正在下载BIB文件, 请稍后......")
         self.OutPrint.clear()
+        if not os.path.exists(self.out_path):
+            os.makedirs(self.out_path)
         for i, title in enumerate(self.title_list):
             self.printf(f"{i+1}. {title}")
             if re.search(r'(https?|ftp)://[^\s/$.?#].[^\s]*', title):   # is a URL

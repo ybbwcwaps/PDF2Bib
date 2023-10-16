@@ -1,1 +1,1 @@
-cmd /k; python ./Code/main.py
+python ./Code/main.py
